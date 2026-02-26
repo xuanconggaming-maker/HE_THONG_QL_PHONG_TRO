@@ -14,10 +14,7 @@
           <h1>HỆ THỐNG QUẢN LÝ PHÒNG TRỌ</h1>
         </div>
         <div class="menu">
-          <ul>
-            <li><a href="index.html">Trang Chủ</a></li>
-            <li><a href="login.html">Đăng Nhập</a></li>
-          </ul>
+          <ul></ul>
         </div>
       </div>
     </div>
@@ -29,11 +26,7 @@
           <p>Đăng ký thành viên để quản lý phòng trọ</p>
         </div>
 
-        <form
-          action="https://formspree.io/f/xykdeowg"
-          method="POST"
-          class="login-form"
-        >
+        <form action="#" method="POST" class="login-form">
           <div class="input-group">
             <label for="reg-username">Tên đăng nhập mới</label>
             <input
@@ -81,7 +74,7 @@
           <button type="submit" class="btn-login">ĐĂNG KÝ NGAY</button>
 
           <p class="signup-link">
-            Đã có tài khoản? <a href="login.html">Đăng nhập tại đây</a>
+            Đã có tài khoản? <a href="index.html">Đăng Nhập Tại Đây</a>
           </p>
         </form>
       </div>
@@ -93,5 +86,37 @@
         kế hệ thống quản lý nhà trọ.
       </p>
     </div>
+    <script>
+      document.querySelector(".login-form").onsubmit = function (e) {
+        e.preventDefault(); // Ngăn gửi form để kiểm tra logic
+
+        let user = document.getElementById("reg-username").value;
+        let email = document.getElementById("reg-email").value;
+        let pass = document.getElementById("reg-password").value;
+        let confirmPass = document.getElementById("confirm-password").value;
+
+        // 1. KIỂM TRA TÀI KHOẢN ĐÃ TỒN TẠI CHƯA
+        let existingUser = localStorage.getItem("registeredUser");
+        if (existingUser === user) {
+          alert("Lỗi: Tài khoản này đã tồn tại trên hệ thống!");
+          return; // Dừng lại, không cho đăng ký tiếp
+        }
+
+        // 2. Kiểm tra mật khẩu khớp nhau không
+        if (pass !== confirmPass) {
+          alert("Mật khẩu xác nhận không khớp!");
+          return;
+        }
+
+        // 3. Nếu mọi thứ ổn, tiến hành lưu
+        localStorage.setItem("registeredUser", user);
+        localStorage.setItem("registeredPass", pass);
+
+        alert(
+          "Đăng ký thành công! Bạn có thể dùng tài khoản này để đăng nhập.",
+        );
+        window.location.href = "index.html"; // Chuyển về trang đăng nhập
+      };
+    </script>
   </body>
 </html>

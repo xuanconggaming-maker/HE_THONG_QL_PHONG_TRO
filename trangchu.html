@@ -43,19 +43,31 @@
     </style>
   </head>
   <body>
-    <div class="header-wrapper">
-      <div class="header">
-        <div class="logo"><h1>HỆ THỐNG QUẢN LÝ PHÒNG TRỌ</h1></div>
-        <nav class="menu">
-          <ul>
-            <li><a href="index.html">Trang chủ</a></li>
-            <li><a href="baocao.html">Báo cáo</a></li>
-            <li><a href="formdk.html">Đăng Ký Ngay</a></li>
-            
-          </ul>
-        </nav>
-      </div>
+    <div class="header">
+  <div class="logo"><h1>HỆ THỐNG QUẢN LÝ PHÒNG TRỌ</h1></div>
+  <div class="user-profile" style="display: flex; align-items: center; gap: 15px;">
+    <div style="text-align: right;">
+      <p id="displayUserName" style="margin: 0; font-weight: bold; font-size: 14px;">Khách thuê</p>
+      <p style="margin: 0; font-size: 12px; color: #ffcccc;">Số dư: <span id="userBalance">0</span>đ</p>
     </div>
+    <div style="width: 40px; height: 40px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #b50d0d; font-weight: bold; cursor: pointer;" onclick="alert('Xem hồ sơ cá nhân')">
+      👤
+    </div>
+    <a href="index.html" style="color: white; font-size: 12px; text-decoration: underline;">Thoát</a>
+  </div>
+</div>
+
+<div class="payment-section" style="background: #fff8f8; padding: 20px; border-radius: 12px; border: 1px dashed #b50d0d; margin-bottom: 30px;">
+  <h3 style="color: #b50d0d; margin-bottom: 15px;">💳 THANH TOÁN & NẠP TIỀN ONLINE</h3>
+  <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+    <button onclick="topUp(50000)" style="padding: 10px 20px; background: #2e7d32; color: white; border: none; border-radius: 5px; cursor: pointer;">+ 50.000đ</button>
+    <button onclick="topUp(100000)" style="padding: 10px 20px; background: #2e7d32; color: white; border: none; border-radius: 5px; cursor: pointer;">+ 100.000đ</button>
+    <button onclick="topUp(500000)" style="padding: 10px 20px; background: #2e7d32; color: white; border: none; border-radius: 5px; cursor: pointer;">+ 500.000đ</button>
+    <button onclick="payOnline()" style="padding: 10px 20px; background: #b50d0d; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;"><li><a href="hopdong.html">>THANH TOÁN HÓA ĐƠN</a></li></button>
+    
+  </div>
+  <p style="font-size: 12px; color: #666; margin-top: 10px;">* Hệ thống hỗ trợ nạp qua MoMo, ZaloPay và VietQR.</p>
+</div>
 
     <div class="container">
       <aside class="sidebar-nav">

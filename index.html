@@ -14,10 +14,7 @@
           <h1>HỆ THỐNG QUẢN LÝ PHÒNG TRỌ</h1>
         </div>
         <div class="menu">
-          <ul>
-            <li><a href="index.html">Trang Chủ</a></li>
-            <li><a href="dangky.html">Đăng Ký</a></li>
-          </ul>
+          <ul></ul>
         </div>
       </div>
     </div>
@@ -57,9 +54,7 @@
             <a href="quenmatkhau.html">Quên mật khẩu?</a>
           </div>
 
-          <a href="trangchu.html" style="text-decoration: none">
-            <button type="button" class="btn-login">VÀO HỆ THỐNG</button>
-          </a>
+          <button type="submit" class="btn-login">VÀO HỆ THỐNG</button>
 
           <p class="signup-link">
             Chưa có tài khoản? <a href="dangky.html">Đăng ký ngay</a>
@@ -74,24 +69,40 @@
         kế hệ thống quản lý nhà trọ.
       </p>
     </div>
+
     <script>
       document.querySelector(".login-form").onsubmit = function (e) {
-        e.preventDefault(); // Ngăn trang tải lại
+        e.preventDefault(); // Ngăn chuyển trang tự động để kiểm tra
 
-        let user = document.getElementById("username").value;
+        let userIn = document.getElementById("username").value;
+        let passIn = document.getElementById("password").value;
 
-        // Lưu vai trò vào trình duyệt
-        if (user.toLowerCase() === "admin") {
-          localStorage.setItem("userRole", "admin");
-        } else {
+        // LẤY THÔNG TIN ĐÃ ĐĂNG KÝ TỪ BỘ NHỚ
+        let savedUser = localStorage.getItem("registeredUser");
+        let savedPass = localStorage.getItem("registeredPass");
+
+        // KIỂM TRA ĐIỀU KIỆN
+        if (userIn === savedUser && passIn === savedPass) {
+          // Đúng tài khoản vừa đăng ký
           localStorage.setItem("userRole", "khach");
+          localStorage.setItem("userName", userIn);
+          alert("Đăng nhập thành công!");
+          window.location.href = "trangchu.html";
+        } else if (userIn === "admin" && passIn === "123456") {
+          // Vẫn giữ 1 tài khoản admin dự phòng để bạn demo cho thầy cô
+          localStorage.setItem("userRole", "admin");
+          alert("Chào Admin!");
+          window.location.href = "trangchu.html";
+        } else {
+          // Sai thông tin
+          alert("Tài khoản không tồn tại hoặc sai mật khẩu!");
+          document.querySelector(".login-card").classList.add("apply-shake");
+          setTimeout(() => {
+            document
+              .querySelector(".login-card")
+              .classList.remove("apply-shake");
+          }, 300);
         }
-
-        // Lưu tên người dùng để hiển thị lời chào
-        localStorage.setItem("userName", user);
-
-        alert("Đăng nhập thành công! Chào mừng " + user);
-        window.location.href = "index.html";
       };
     </script>
   </body>
