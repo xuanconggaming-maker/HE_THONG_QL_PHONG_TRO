@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng nhập hệ thống - Quản lý nhà trọ</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/login.css" />
+  </head>
+  <body>
+    <div class="header-wrapper">
+      <div class="header">
+        <div class="logo">
+          <h1>HỆ THỐNG QUẢN LÝ PHÒNG TRỌ</h1>
+        </div>
+        <div class="menu">
+          <ul>
+            <li><a href="index.html">Trang Chủ</a></li>
+            <li><a href="formdk.html">Đăng Ký</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="login-page">
+      <div class="login-card">
+        <div class="login-header">
+          <h2>ĐĂNG NHẬP</h2>
+          <p>Hệ thống quản lý nhà trọ nhóm 9</p>
+        </div>
+
+        <form action="#" method="post" class="login-form">
+          <div class="input-group">
+            <label for="username">Tên đăng nhập</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              placeholder="Nhập tài khoản của bạn"
+              required
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="password">Mật khẩu</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Nhập mật khẩu"
+              required
+            />
+          </div>
+
+          <div class="login-options">
+            <label><input type="checkbox" /> Ghi nhớ</label>
+            <a href="quenmatkhau.html">Quên mật khẩu?</a>
+          </div>
+
+          <button type="submit" class="btn-login">VÀO HỆ THỐNG</button>
+
+          <p class="signup-link">
+            Chưa có tài khoản? <a href="formdk.html">Đăng ký ngay</a>
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>
+        &copy;2026. Sinh Viên Khoa CNTT TRƯỜNG ĐẠI HỌC NGHỆ AN - Đề tài: Thiết
+        kế hệ thống quản lý nhà trọ.
+      </p>
+    </div>
+    <script>
+      document.querySelector(".login-form").onsubmit = function (e) {
+        e.preventDefault(); // Ngăn trang tải lại
+
+        let user = document.getElementById("username").value;
+
+        // Lưu vai trò vào trình duyệt
+        if (user.toLowerCase() === "admin") {
+          localStorage.setItem("userRole", "admin");
+        } else {
+          localStorage.setItem("userRole", "khach");
+        }
+
+        // Lưu tên người dùng để hiển thị lời chào
+        localStorage.setItem("userName", user);
+
+        alert("Đăng nhập thành công! Chào mừng " + user);
+        window.location.href = "index.html";
+      };
+    </script>
+  </body>
+</html>

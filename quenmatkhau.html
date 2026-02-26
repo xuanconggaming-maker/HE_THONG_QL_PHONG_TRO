@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quên mật khẩu - Quản lý nhà trọ</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/login.css" />
+  </head>
+  <body>
+    <div class="header-wrapper">
+      <div class="header">
+        <div class="logo">
+          <h1>HỌC THIẾT KẾ WEB</h1>
+        </div>
+        <div class="menu">
+          <ul>
+            <li><a href="index.html">Trang Chủ</a></li>
+            <li><a href="login.html">Đăng Nhập</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="login-page">
+      <div class="login-card">
+        <div class="login-header">
+          <h2>KHÔI PHỤC</h2>
+          <p>Nhập email để nhận liên kết đặt lại mật khẩu</p>
+        </div>
+
+        <form
+          action="https://formspree.io/f/xwvnajqo"
+          method="POST"
+          class="login-form"
+          id="forgotForm"
+        >
+          <div class="input-group">
+            <label for="email">Email đăng ký</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="example@email.com"
+              required
+            />
+          </div>
+
+          <button type="submit" class="btn-login">GỬI YÊU CẦU</button>
+
+          <p class="signup-link">
+            Nhớ ra mật khẩu? <a href="login.html">Đăng nhập</a>
+          </p>
+        </form>
+
+        <div
+          id="message"
+          style="
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+            color: green;
+            font-weight: bold;
+          "
+        >
+          Mã khôi phục sẽ được gửi đến Email của bạn sớm nhất!
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>
+        &copy;2026. Sinh Viên Khoa CNTT TRƯỜNG ĐẠI HỌC NGHỆ AN - Đề tài: Thiết
+        kế hệ thống quản lý nhà trọ.
+      </p>
+    </div>
+
+    <script>
+      // Lưu ý: Nếu muốn trang web gửi dữ liệu thực sự qua Formspree,
+      // bạn cần xóa bỏ dòng "e.preventDefault();" hoặc tùy chỉnh để thông báo hiện sau khi gửi thành công.
+      document.getElementById("forgotForm").onsubmit = function (e) {
+        // e.preventDefault(); // Nếu để dòng này, Formspree sẽ không nhận được dữ liệu
+        document.getElementById("message").style.display = "block";
+        this.style.opacity = "0.5"; // Làm mờ form thay vì ẩn hoàn toàn để Formspree kịp xử lý
+      };
+    </script>
+  </body>
+</html>

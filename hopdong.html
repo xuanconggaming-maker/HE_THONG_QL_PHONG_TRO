@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Danh sách Hợp đồng - Xuân Công</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/home.css" />
+    <style>
+      .contract-box {
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+      }
+      .contract-header {
+        border-bottom: 2px solid #b50d0d;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .contract-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+      }
+      .label {
+        font-weight: bold;
+        color: #555;
+      }
+      .status-tag {
+        padding: 5px 12px;
+        border-radius: 15px;
+        font-size: 12px;
+        background: #e7f3e7;
+        color: #2e7d32;
+        font-weight: bold;
+      }
+      .contract-terms {
+        background: #f9f9f9;
+        padding: 15px;
+        border-radius: 5px;
+        margin-top: 15px;
+        font-size: 13px;
+        border-left: 3px solid #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header-wrapper">
+      <div class="header">
+        <div class="logo"><h1>HỆ THỐNG QUẢN LÝ PHÒNG TRỌ</h1></div>
+        <nav class="menu">
+          <ul>
+            <li><a href="index.html">Trang chủ</a></li>
+            <li><a href="baocao.html">Báo cáo</a></li>
+            <li><a href="formdk.html">Đăng Ký Ngay</a></li>
+            <li><a href="login.html">Đăng Nhập</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <div class="container">
+      <aside class="sidebar-nav">
+        <h2>DANH MỤC</h2>
+        <ul>
+          <li><a href="index.html">🏠 Danh sách phòng</a></li>
+          <li><a href="#">👥 Khách thuê</a></li>
+          <li>
+            <a href="hopdong.html" style="color: #b50d0d; font-weight: bold"
+              >📜 Hợp đồng</a
+            >
+          </li>
+          <li><a href="#">💰 Hóa đơn</a></li>
+        </ul>
+      </aside>
+
+      <main class="main-content">
+        <div
+          id="liveClock"
+          style="
+            text-align: right;
+            font-weight: bold;
+            color: #b50d0d;
+            margin-bottom: 20px;
+          "
+        ></div>
+
+        <h2 style="margin-bottom: 20px">Quản lý Hợp đồng thuê trọ</h2>
+
+        <div class="contract-box">
+          <div class="contract-header">
+            <h3 style="color: #b50d0d; margin: 0">Mã HĐ: HĐ2026-101</h3>
+            <span class="status-tag">ĐANG HIỆU LỰC</span>
+          </div>
+          <div class="contract-grid">
+            <div><span class="label">Phòng:</span> P.101 (Phòng Đơn)</div>
+            <div><span class="label">Giá thuê:</span> 2.500.000đ/tháng</div>
+            <div><span class="label">Khách thuê:</span> Nguyễn Văn An</div>
+            <div><span class="label">Tiền cọc:</span> 2.500.000đ</div>
+            <div><span class="label">Ngày ký:</span> 01/01/2026</div>
+            <div><span class="label">Thời hạn:</span> 12 tháng</div>
+          </div>
+          <div class="contract-terms">
+            <b>Điều khoản chung:</b> Khách thuê phải đóng tiền trước ngày 05
+            hàng tháng. Giữ gìn an ninh trật tự và vệ sinh chung của nhà trọ.
+          </div>
+        </div>
+
+        <div class="contract-box">
+          <div class="contract-header">
+            <h3 style="color: #b50d0d; margin: 0">Mã HĐ: HĐ2026-201</h3>
+            <span class="status-tag">ĐANG HIỆU LỰC</span>
+          </div>
+          <div class="contract-grid">
+            <div><span class="label">Phòng:</span> P.201 (Phòng Đơn)</div>
+            <div><span class="label">Giá thuê:</span> 2.500.000đ/tháng</div>
+            <div><span class="label">Khách thuê:</span> Trần Văn B</div>
+            <div><span class="label">Tiền cọc:</span> 2.500.000đ</div>
+            <div><span class="label">Ngày ký:</span> 15/01/2026</div>
+            <div><span class="label">Thời hạn:</span> 06 tháng</div>
+          </div>
+          <div class="contract-terms">
+            <b>Điều khoản chung:</b> Không được tự ý thay đổi kết cấu phòng.
+            Thông báo trước 30 ngày nếu có ý định chấm dứt hợp đồng.
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <div class="footer">
+      <p>
+        &copy;2026. Sinh Viên Khoa CNTT TRƯỜNG ĐẠI HỌC NGHỆ AN - Đề tài: Thiết
+        kế hệ thống quản lý nhà trọ.
+      </p>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

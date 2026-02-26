@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Báo cáo sự cố - Quản lý nhà trọ</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/baocao.css" />
+  </head>
+  <body>
+    <div class="header-wrapper">
+      <div class="header">
+        <div class="logo"><h1>HỆ THỐNG QUẢN LÝ PHÒNG TRỌ</h1></div>
+        <nav class="menu">
+          <ul>
+            <li><a href="index.html">Trang chủ</a></li>
+            <li><a href="baocao.html">Báo cáo</a></li>
+            <li><a href="formdk.html">Đăng Ký</a></li>
+            <li><a href="login.html">Đăng Nhập</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <div style="text-align: right; margin-bottom: 15px; padding-right: 20px">
+      <span
+        id="liveClock"
+        style="
+          font-weight: bold;
+          color: #b50d0d;
+          background: #fff5f5;
+          padding: 5px 15px;
+          border-radius: 20px;
+          border: 1px solid #ffcccc;
+        "
+      ></span>
+    </div>
+
+    <div class="container">
+      <div class="report-card">
+        <h2>Gửi báo cáo / Khiếu nại</h2>
+        <p>Thông tin sẽ được gửi trực tiếp đến quản lý nhà trọ.</p>
+
+        <form action="https://formspree.io/f/xdadpanl" method="POST">
+          <div class="form-group">
+            <label>Họ tên khách thuê:</label>
+            <input
+              type="text"
+              name="name"
+              placeholder="Nhập họ tên của bạn"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Số phòng:</label>
+            <input
+              type="text"
+              name="room"
+              placeholder="Ví dụ: P.101"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Loại sự cố:</label>
+            <select name="type">
+              <option value="Dien nuoc">Hỏng điện/nước</option>
+              <option value="An ninh">Vấn đề an ninh</option>
+              <option value="Ve sinh">Vấn đề vệ sinh</option>
+              <option value="Khac">Vấn đề khác</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Nội dung chi tiết:</label>
+            <textarea
+              name="message"
+              rows="5"
+              placeholder="Mô tả chi tiết sự cố..."
+              required
+            ></textarea>
+          </div>
+
+          <button type="submit" class="btn-send">GỬI BÁO CÁO NGAY</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>
+        &copy;2026. Sinh Viên Khoa CNTT TRƯỜNG ĐẠI HỌC NGHỆ AN - Đề tài: Thiết
+        kế hệ thống quản lý nhà trọ.
+      </p>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,117 @@
+/* Nền trang đăng nhập */
+.login-page {
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background:
+    linear-gradient(rgba(240, 242, 245, 0.8), rgba(240, 242, 245, 0.8)),
+    url("../image/background-login.jpg");
+  background-size: cover;
+  padding: 20px;
+}
+
+/* Khung đăng nhập (Card) */
+.login-card {
+  background: white;
+  width: 100%;
+  max-width: 400px;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.login-header h2 {
+  color: #b50d0d;
+  margin: 0;
+  font-size: 28px;
+  letter-spacing: 1px;
+}
+
+.login-header p {
+  color: #777;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+/* Các ô nhập liệu */
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #444;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #eee;
+  border-radius: 8px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.input-group input:focus {
+  border-color: #b50d0d;
+}
+
+/* Tùy chọn bổ sung */
+.login-options {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  margin-bottom: 25px;
+}
+
+.login-options a {
+  color: #b50d0d;
+  text-decoration: none;
+}
+
+/* Nút bấm nổi bật */
+.btn-login {
+  width: 100%;
+  padding: 14px;
+  background: #b50d0d;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.btn-login:hover {
+  background: #8b0a0a;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(181, 13, 13, 0.3);
+}
+
+.signup-link {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.signup-link a {
+  color: #b50d0d;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* Responsive cho điện thoại (9:16) */
+@media screen and (max-width: 480px) {
+  .login-card {
+    padding: 30px 20px;
+  }
+}
