@@ -3,49 +3,62 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Danh sách Hợp đồng - Xuân Công</title>
+    <title>Quản lý Hợp đồng - Xuân Công</title>
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/home.css" />
     <style>
+      .contract-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
       .contract-box {
         background: #fff;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        margin-bottom: 20px;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        border-top: 5px solid #b50d0d;
       }
       .contract-header {
-        border-bottom: 2px solid #b50d0d;
-        padding-bottom: 10px;
-        margin-bottom: 15px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        margin-bottom: 15px;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
+      }
+      .status-tag {
+        background: #e8f5e9;
+        color: #2e7d32;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: bold;
       }
       .contract-grid {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 15px;
       }
-      .label {
-        font-weight: bold;
+      .info-item b {
         color: #555;
       }
-      .status-tag {
-        padding: 5px 12px;
-        border-radius: 15px;
-        font-size: 12px;
-        background: #e7f3e7;
-        color: #2e7d32;
-        font-weight: bold;
-      }
-      .contract-terms {
-        background: #f9f9f9;
-        padding: 15px;
-        border-radius: 5px;
+      .contract-footer {
         margin-top: 15px;
-        font-size: 13px;
-        border-left: 3px solid #ccc;
+        padding-top: 10px;
+        border-top: 1px dashed #ccc;
+        font-style: italic;
+        font-size: 14px;
+        color: #666;
+      }
+      .btn-detail {
+        background: #b50d0d;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
       }
     </style>
   </head>
@@ -75,58 +88,67 @@
               >📜 Hợp đồng</a
             >
           </li>
-          <li><a href="#">💰 Hóa đơn</a></li>
+          <li><a href="hoadon.html">💰 Hóa đơn</a></li>
         </ul>
       </aside>
 
       <main class="main-content">
         <div
           id="liveClock"
-          style="
-            text-align: right;
-            font-weight: bold;
-            color: #b50d0d;
-            margin-bottom: 20px;
-          "
+          style="text-align: right; margin-bottom: 20px"
         ></div>
 
-        <h2 style="margin-bottom: 20px">Quản lý Hợp đồng thuê trọ</h2>
+        <h2>Danh sách Hợp đồng Thuê phòng</h2>
+        <p style="margin-bottom: 25px; color: #666">
+          Quản lý các cam kết pháp lý giữa chủ trọ và khách thuê.
+        </p>
 
-        <div class="contract-box">
-          <div class="contract-header">
-            <h3 style="color: #b50d0d; margin: 0">Mã HĐ: HĐ2026-101</h3>
-            <span class="status-tag">ĐANG HIỆU LỰC</span>
+        <div class="contract-container">
+          <div class="contract-box">
+            <div class="contract-header">
+              <h3 style="margin: 0; color: #b50d0d">Mã HĐ: HĐ2026-101</h3>
+              <span class="status-tag">ĐANG HIỆU LỰC</span>
+            </div>
+            <div class="contract-grid">
+              <div class="info-item"><b>Khách thuê:</b> Nguyễn Văn An</div>
+              <div class="info-item"><b>Số phòng:</b> P.101</div>
+              <div class="info-item"><b>Giá thuê:</b> 2.500.000đ/tháng</div>
+              <div class="info-item"><b>Tiền đặt cọc:</b> 2.500.000đ</div>
+              <div class="info-item"><b>Ngày ký:</b> 01/01/2026</div>
+              <div class="info-item"><b>Thời hạn:</b> 12 tháng</div>
+            </div>
+            <div class="contract-footer">
+              Ghi chú: Đã bàn giao 01 chìa khóa cổng, 01 chìa khóa phòng.
+            </div>
+            <button
+              class="btn-detail"
+              onclick="alert('Đang tải bản scan hợp đồng...')"
+            >
+              Xem chi tiết
+            </button>
           </div>
-          <div class="contract-grid">
-            <div><span class="label">Phòng:</span> P.101 (Phòng Đơn)</div>
-            <div><span class="label">Giá thuê:</span> 2.500.000đ/tháng</div>
-            <div><span class="label">Khách thuê:</span> Nguyễn Văn An</div>
-            <div><span class="label">Tiền cọc:</span> 2.500.000đ</div>
-            <div><span class="label">Ngày ký:</span> 01/01/2026</div>
-            <div><span class="label">Thời hạn:</span> 12 tháng</div>
-          </div>
-          <div class="contract-terms">
-            <b>Điều khoản chung:</b> Khách thuê phải đóng tiền trước ngày 05
-            hàng tháng. Giữ gìn an ninh trật tự và vệ sinh chung của nhà trọ.
-          </div>
-        </div>
 
-        <div class="contract-box">
-          <div class="contract-header">
-            <h3 style="color: #b50d0d; margin: 0">Mã HĐ: HĐ2026-201</h3>
-            <span class="status-tag">ĐANG HIỆU LỰC</span>
-          </div>
-          <div class="contract-grid">
-            <div><span class="label">Phòng:</span> P.201 (Phòng Đơn)</div>
-            <div><span class="label">Giá thuê:</span> 2.500.000đ/tháng</div>
-            <div><span class="label">Khách thuê:</span> Trần Văn B</div>
-            <div><span class="label">Tiền cọc:</span> 2.500.000đ</div>
-            <div><span class="label">Ngày ký:</span> 15/01/2026</div>
-            <div><span class="label">Thời hạn:</span> 06 tháng</div>
-          </div>
-          <div class="contract-terms">
-            <b>Điều khoản chung:</b> Không được tự ý thay đổi kết cấu phòng.
-            Thông báo trước 30 ngày nếu có ý định chấm dứt hợp đồng.
+          <div class="contract-box">
+            <div class="contract-header">
+              <h3 style="margin: 0; color: #b50d0d">Mã HĐ: HĐ2026-202</h3>
+              <span
+                class="status-tag"
+                style="background: #fff3e0; color: #ef6c00"
+                >SẮP HẾT HẠN</span
+              >
+            </div>
+            <div class="contract-grid">
+              <div class="info-item"><b>Khách thuê:</b> Lê Thị Chúc</div>
+              <div class="info-item"><b>Số phòng:</b> P.202</div>
+              <div class="info-item"><b>Giá thuê:</b> 2.000.000đ/tháng</div>
+              <div class="info-item"><b>Tiền đặt cọc:</b> 2.000.000đ</div>
+              <div class="info-item"><b>Ngày ký:</b> 15/02/2025</div>
+              <div class="info-item"><b>Thời hạn:</b> 12 tháng</div>
+            </div>
+            <div class="contract-footer">
+              Ghi chú: Khách có nhu cầu gia hạn thêm 6 tháng.
+            </div>
+            <button class="btn-detail">Gia hạn ngay</button>
           </div>
         </div>
       </main>
@@ -134,8 +156,7 @@
 
     <div class="footer">
       <p>
-        &copy;2026. Sinh Viên Khoa CNTT TRƯỜNG ĐẠI HỌC NGHỆ AN - Đề tài: Thiết
-        kế hệ thống quản lý nhà trọ.
+        &copy;2026 Sinh Viên Vừ Xuân Công - Khoa CNTT TRƯỜNG ĐẠI HỌC NGHỆ AN
       </p>
     </div>
 

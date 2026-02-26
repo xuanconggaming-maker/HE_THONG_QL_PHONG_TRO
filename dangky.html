@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng ký tài khoản - Quản lý nhà trọ</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/login.css" />
+  </head>
+  <body>
+    <div class="header-wrapper">
+      <div class="header">
+        <div class="logo">
+          <h1>HỆ THỐNG QUẢN LÝ PHÒNG TRỌ</h1>
+        </div>
+        <div class="menu">
+          <ul>
+            <li><a href="index.html">Trang Chủ</a></li>
+            <li><a href="login.html">Đăng Nhập</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="login-page">
+      <div class="login-card">
+        <div class="login-header">
+          <h2>TẠO TÀI KHOẢN</h2>
+          <p>Đăng ký thành viên để quản lý phòng trọ</p>
+        </div>
+
+        <form
+          action="https://formspree.io/f/xykdeowg"
+          method="POST"
+          class="login-form"
+        >
+          <div class="input-group">
+            <label for="reg-username">Tên đăng nhập mới</label>
+            <input
+              type="text"
+              id="reg-username"
+              name="username"
+              placeholder="Ví dụ: congxuan99"
+              required
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="reg-email">Email liên hệ</label>
+            <input
+              type="email"
+              id="reg-email"
+              name="email"
+              placeholder="xuanconggaming@gmail.com"
+              required
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="reg-password">Mật khẩu</label>
+            <input
+              type="password"
+              id="reg-password"
+              name="password"
+              placeholder="Tối thiểu 6 ký tự"
+              required
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="confirm-password">Xác nhận mật khẩu</label>
+            <input
+              type="password"
+              id="confirm-password"
+              name="confirm-password"
+              placeholder="Nhập lại mật khẩu"
+              required
+            />
+          </div>
+
+          <button type="submit" class="btn-login">ĐĂNG KÝ NGAY</button>
+
+          <p class="signup-link">
+            Đã có tài khoản? <a href="login.html">Đăng nhập tại đây</a>
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>
+        &copy;2026. Sinh Viên Khoa CNTT TRƯỜNG ĐẠI HỌC NGHỆ AN - Đề tài: Thiết
+        kế hệ thống quản lý nhà trọ.
+      </p>
+    </div>
+  </body>
+</html>

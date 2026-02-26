@@ -115,3 +115,39 @@
     padding: 30px 20px;
   }
 }
+/* Hiệu ứng rung khi nhập sai tài khoản/mật khẩu */
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+  75% {
+    transform: translateX(-10px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Class để kích hoạt hiệu ứng rung */
+.apply-shake {
+  animation: shake 0.3s;
+}
+
+/* Màu sắc cho thông báo lỗi */
+#error-message {
+  color: #b50d0d;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 15px;
+  font-weight: bold;
+  background: #fff0f0;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ffcccc;
+}
