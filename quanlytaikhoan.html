@@ -116,6 +116,29 @@
         border: none;
         font-size: 16px;
       }
+      /* Tạo khung cuộn cho bảng trên điện thoại */
+      .container {
+        max-width: 1000px;
+        margin: auto;
+        background: white;
+        padding: 15px; /* Giảm bớt khoảng cách lề trên mobile */
+        border-radius: 12px;
+        overflow-x: auto; /* Tự động hiện thanh cuộn ngang nếu bảng quá rộng */
+      }
+
+      @media (max-width: 600px) {
+        .header-flex {
+          flex-direction: column; /* Chuyển tiêu đề lên trên, nút quay lại xuống dưới */
+          text-align: center;
+          gap: 15px;
+        }
+
+        /* Ẩn bớt cột Email trên điện thoại nhỏ để ưu tiên xem mật khẩu và số dư */
+        th:nth-child(3),
+        td:nth-child(3) {
+          display: none;
+        }
+      }
     </style>
 
     <tbody id="userTableBody"></tbody>

@@ -15,19 +15,38 @@
         background: #f4f7f6;
         font-family: "Segoe UI", sans-serif;
       }
-      .admin-container {
-        padding: 30px;
-        max-width: 1200px;
-        margin: auto;
-      }
+      /* Tối ưu Container linh hoạt */
+.admin-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+    width: 100%; /* Đảm bảo không bị tràn trên điện thoại */
+}
 
-      /* Header & Đăng xuất */
-      .admin-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 30px;
-      }
+/* Header thông minh: Tự động xuống hàng trên điện thoại 9:16 */
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap; /* Cho phép các nút tự nhảy dòng khi màn hình hẹp */
+    gap: 10px;
+}
+
+/* Điều chỉnh tiêu đề và nút bấm khi xem trên điện thoại */
+@media (max-width: 768px) {
+    .admin-header h1 {
+        font-size: 1.5rem; /* Giảm cỡ chữ tiêu đề trên mobile */
+        width: 100%;
+        text-align: center;
+    }
+    .admin-header a {
+        flex: 1; /* Các nút bấm chia đều chiều ngang màn hình dọc */
+        text-align: center;
+        font-size: 13px;
+        padding: 8px 5px;
+    }
+}
       .btn-logout {
         background: #e74c3c;
         color: white;
