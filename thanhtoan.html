@@ -271,6 +271,33 @@
         >
       </div>
     </div>
+    <div
+      class="transaction-history"
+      style="margin-top: 30px; border-top: 2px solid #eee; padding-top: 20px"
+    >
+      <h3 style="color: #b50d0d; margin-bottom: 15px">
+        📜 LỊCH SỬ NẠP TIỀN CỦA BẠN
+      </h3>
+      <table style="width: 100%; border-collapse: collapse; font-size: 14px">
+        <thead>
+          <tr style="background: #f8f9fa">
+            <th style="padding: 10px; border: 1px solid #ddd; text-align: left">
+              Mã GD
+            </th>
+            <th style="padding: 10px; border: 1px solid #ddd; text-align: left">
+              Số tiền
+            </th>
+            <th style="padding: 10px; border: 1px solid #ddd; text-align: left">
+              Thời gian
+            </th>
+            <th style="padding: 10px; border: 1px solid #ddd; text-align: left">
+              Trạng thái
+            </th>
+          </tr>
+        </thead>
+        <tbody id="userHistoryBody"></tbody>
+      </table>
+    </div>
 
     <div class="footer">
       <p>
@@ -290,25 +317,59 @@
         document.getElementById("usernameDisplay").innerText = registeredUser;
         document.getElementById("userBalance").innerText =
           currentBalance.toLocaleString("vi-VN");
-      }
 
+        // HIỂN THỊ LỊCH SỬ NẠP TIỀN THÀNH CÔNG
+        const allLogs = getTransactions(); // Hàm từ database.js
+        const userLogs = allLogs.filter((log) => log.user === registeredUser);
+
+        let logHtml = "";
+        userLogs.forEach((log) => {
+          logHtml += `
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">${log.id}</td>
+                    <td style="padding: 10px; border: 1px solid #ddd; color: green; font-weight: bold;">+${log.amount.toLocaleString()}đ</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">${log.time}</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;"><span style="color: green;">✅ Thành công</span></td>
+                </tr>`;
+        });
+        document.getElementById("userHistoryBody").innerHTML =
+          logHtml ||
+          "<tr><td colspan='4' align='center' style='padding:15px; color:#999;'>Chưa có giao dịch thành công nào.</td></tr>";
+      }
       function step1_ShowQR() {
-        pendingAmount = parseInt(document.getElementById("customAmount").value);
+        const amountInput = document.getElementById("customAmount");
+        pendingAmount = parseInt(amountInput.value);
+
         if (isNaN(pendingAmount) || pendingAmount < 10000) {
-          alert("Vui lòng nhập tối thiểu 10.000đ!");
+          alert("Vui lòng nhập số tiền hợp lệ!");
           return;
         }
+
+        // Cập nhật giao diện
         document.getElementById("qrContainer").style.display = "block";
         document.getElementById("qrEmpty").style.display = "none";
         document.getElementById("transferMemo").innerText =
           "NAP " + registeredUser.toUpperCase();
         document.getElementById("displayAmount").innerText =
           pendingAmount.toLocaleString("vi-VN") + "đ";
-        document.getElementById("btnConfirm").style.display = "block";
-        document.getElementById("qrImg").src =
-          `https://img.vietqr.io/image/MB-4619092006-compact.png?amount=${pendingAmount}&addInfo=NAP ${registeredUser}&accountName=VU XUAN CONG`;
-      }
 
+        // --- ĐOẠN QUAN TRỌNG NHẤT: SỬA LINK QR ---
+        const bankID = "MB";
+        const accountNo = "4619092006";
+        const memo = "NAP " + registeredUser;
+
+        // LƯU Ý: Phải dùng dấu ` (phím bên trái số 1) để bọc link này
+        // Dán đè dòng này vào code của bạn
+        const qrUrl =
+          "https://img.vietqr.io/image/MB-4619092006-compact.png?amount=" +
+          pendingAmount +
+          "&addInfo=NAP%20" +
+          encodeURIComponent(registeredUser) +
+          "&accountName=VU%20XUAN%20CONG";
+
+        document.getElementById("qrImg").src = qrUrl;
+        document.getElementById("btnConfirm").style.display = "block";
+      }
       function step2_UserConfirmed() {
         // 1. Gửi yêu cầu nạp tiền vào kho lưu trữ chờ duyệt
         if (typeof requestDeposit === "function") {
