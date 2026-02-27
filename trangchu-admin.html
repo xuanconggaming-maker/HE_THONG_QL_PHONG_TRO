@@ -16,37 +16,37 @@
         font-family: "Segoe UI", sans-serif;
       }
       /* Tối ưu Container linh hoạt */
-.admin-container {
-    padding: 20px;
-    max-width: 1200px;
-    margin: auto;
-    width: 100%; /* Đảm bảo không bị tràn trên điện thoại */
-}
+      .admin-container {
+        padding: 20px;
+        max-width: 1200px;
+        margin: auto;
+        width: 100%; /* Đảm bảo không bị tràn trên điện thoại */
+      }
 
-/* Header thông minh: Tự động xuống hàng trên điện thoại 9:16 */
-.admin-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-    flex-wrap: wrap; /* Cho phép các nút tự nhảy dòng khi màn hình hẹp */
-    gap: 10px;
-}
+      /* Header thông minh: Tự động xuống hàng trên điện thoại 9:16 */
+      .admin-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        flex-wrap: wrap; /* Cho phép các nút tự nhảy dòng khi màn hình hẹp */
+        gap: 10px;
+      }
 
-/* Điều chỉnh tiêu đề và nút bấm khi xem trên điện thoại */
-@media (max-width: 768px) {
-    .admin-header h1 {
-        font-size: 1.5rem; /* Giảm cỡ chữ tiêu đề trên mobile */
-        width: 100%;
-        text-align: center;
-    }
-    .admin-header a {
-        flex: 1; /* Các nút bấm chia đều chiều ngang màn hình dọc */
-        text-align: center;
-        font-size: 13px;
-        padding: 8px 5px;
-    }
-}
+      /* Điều chỉnh tiêu đề và nút bấm khi xem trên điện thoại */
+      @media (max-width: 768px) {
+        .admin-header h1 {
+          font-size: 1.5rem; /* Giảm cỡ chữ tiêu đề trên mobile */
+          width: 100%;
+          text-align: center;
+        }
+        .admin-header a {
+          flex: 1; /* Các nút bấm chia đều chiều ngang màn hình dọc */
+          text-align: center;
+          font-size: 13px;
+          padding: 8px 5px;
+        }
+      }
       .btn-logout {
         background: #e74c3c;
         color: white;
@@ -142,11 +142,11 @@
   <body>
     <div class="admin-container">
       <div class="admin-header">
-
         <h1 style="color: var(--admin-bg)">💎 Quản Trị Hệ Thống - Xuân Công</h1>
-       <a href="quanlytaikhoan.html" class="btn-logout">👥 Quản Lý Tài Khoản
-       </a> <a href="index.html" class="btn-logout">🚪 Đăng xuất</a>
-        
+        <a href="quanlytaikhoan.html" class="btn-logout"
+          >👥 Quản Lý Tài Khoản
+        </a>
+        <a href="index.html" class="btn-logout">🚪 Đăng xuất</a>
       </div>
 
       <div class="dashboard-grid">
@@ -167,45 +167,63 @@
           <p id="pendingCount">0</p>
         </div>
       </div>
-
-      <div class="section-box" style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-top: 20px;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-            <div class="section-box" style="border: 2px solid #e67e22;">
+      <div
+        class="section-box"
+        style="border: 2px solid #e67e22; overflow-x: auto"
+      >
         <div class="section-title">
-          <h2 style="color: #e67e22;">📩 Yêu Cầu Nạp Tiền Chờ Duyệt</h2>
+          <h2 style="color: #e67e22">📩 Yêu Cầu Nạp Tiền Chờ Duyệt</h2>
         </div>
         <table>
           <thead>
             <tr>
               <th>Khách Hàng</th>
+
               <th>Số Tiền</th>
+
               <th>Thời Gian</th>
+
               <th>Hành Động</th>
             </tr>
           </thead>
+
           <tbody id="pendingBody"></tbody>
         </table>
-      </div>  
-            <h2 style="margin: 0; color: #2c3e50;">🛠 QUẢN LÝ VÀ CHỈNH SỬA PHÒNG</h2>
-              <button class="btn-save" style="background: #3498db; font-size: 14px; padding: 10px 20px; border: none; border-radius: 5px; color: white; cursor: pointer;" onclick="addNewRoom()">
-                + THÊM PHÒNG MỚI
-              </button>
-          </div>
-          <table>
-            <thead>
-              <tr>
-                <th>Mã Phòng</th>
-                <th>Loại Phòng</th>
-                <th>Khách thuê</th>
-                <th>Giá gốc (VNĐ)</th>
-                <th>Trạng thái</th>
-                
-              </tr>
-            </thead>
-            <tbody id="adminRoomList"></tbody>
-          </table>
+      </div>
+
+      <div class="section-box" style="overflow-x: auto">
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+          "
+        >
+          <h2 style="margin: 0; color: #2c3e50">
+            🛠 QUẢN LÝ VÀ CHỈNH SỬA PHÒNG
+          </h2>
+          <button class="btn-save" onclick="addNewRoom()">
+            + THÊM PHÒNG MỚI
+          </button>
         </div>
 
+        <table>
+          <thead>
+            <tr>
+              <th>Mã Phòng</th>
+              <th>Loại Phòng</th>
+              <th>Khách thuê</th>
+              <th>Giá gốc (VNĐ)</th>
+              <th>Trạng thái</th>
+              <th>Hành Động</th>
+            </tr>
+          </thead>
+          <tbody id="adminRoomList"></tbody>
+        </table>
+      </div>
     <script src="database.js"></script>
     <script>
       function renderAdmin() {
@@ -215,8 +233,8 @@
 
         // 1. Render yêu cầu nạp tiền
         let pnlHtml = "";
-        pending.forEach(req => {
-            pnlHtml += `<tr>
+        pending.forEach((req) => {
+          pnlHtml += `<tr>
                 <td><b>${req.user}</b></td>
                 <td style="color: #27ae60; font-weight: bold;">${req.amount.toLocaleString()}đ</td>
                 <td>${req.time}</td>
@@ -226,15 +244,17 @@
                 </td>
             </tr>`;
         });
-        document.getElementById("pendingBody").innerHTML = pnlHtml || "<tr><td colspan='4' align='center'>Không có yêu cầu nạp tiền nào.</td></tr>";
+        document.getElementById("pendingBody").innerHTML =
+          pnlHtml ||
+          "<tr><td colspan='4' align='center'>Không có yêu cầu nạp tiền nào.</td></tr>";
 
         // 2. Render danh sách phòng
         let roomHtml = "";
         let rented = 0;
         // Thêm nút Xóa vào cột cuối cùng trong hàm renderAdmin
-rooms.forEach((r) => {
-  if (r.status === "Đã thuê") rented++;
-  roomHtml += `
+        rooms.forEach((r) => {
+          if (r.status === "Đã thuê") rented++;
+          roomHtml += `
     <tr>
         <td><b>${r.id}</b></td>
         <td>${r.type || "Phòng Đơn"}</td>
@@ -251,47 +271,48 @@ rooms.forEach((r) => {
             <button class="btn-save" onclick="deleteRoom('${r.id}')" style="background: #e74c3c; margin-left: 5px;">🗑️</button>
         </td>
     </tr>`;
-});
+        });
         document.getElementById("adminRoomList").innerHTML = roomHtml;
 
         // 3. Cập nhật Dashboard
         let totalIncome = logs.reduce((sum, log) => sum + log.amount, 0);
-        document.getElementById("totalIncome").innerText = totalIncome.toLocaleString() + "đ";
+        document.getElementById("totalIncome").innerText =
+          totalIncome.toLocaleString() + "đ";
         document.getElementById("rentedCount").innerText = rented;
         document.getElementById("emptyCount").innerText = rooms.length - rented;
         document.getElementById("pendingCount").innerText = pending.length;
       }
-// Hàm xóa phòng dứt điểm
-function deleteRoom(id) {
-    if (confirm(`Bạn có chắc chắn muốn xóa vĩnh viễn phòng ${id} không?`)) {
-        let rooms = getRooms(); // Lấy danh sách từ database.js
-        let index = rooms.findIndex(r => r.id === id);
-        
-        if (index !== -1) {
+      // Hàm xóa phòng dứt điểm
+      function deleteRoom(id) {
+        if (confirm(`Bạn có chắc chắn muốn xóa vĩnh viễn phòng ${id} không?`)) {
+          let rooms = getRooms(); // Lấy danh sách từ database.js
+          let index = rooms.findIndex((r) => r.id === id);
+
+          if (index !== -1) {
             rooms.splice(index, 1); // Xóa phòng khỏi mảng
             localStorage.setItem("ROOM_DATABASE", JSON.stringify(rooms)); // Lưu lại kho dữ liệu
             alert("✅ Đã xóa phòng thành công!");
             renderAdmin(); // Tải lại bảng để thấy kết quả
+          }
         }
-    }
-}
+      }
       // HÀM DUYỆT TIỀN
       function handleApprove(id) {
-        if(confirm("Xác nhận đã nhận tiền và muốn cộng vào ví cho khách?")) {
-            if(approveDeposit(id)) { 
-                alert("✅ Đã duyệt nạp tiền thành công!"); 
-                renderAdmin(); 
-            }
+        if (confirm("Xác nhận đã nhận tiền và muốn cộng vào ví cho khách?")) {
+          if (approveDeposit(id)) {
+            alert("✅ Đã duyệt nạp tiền thành công!");
+            renderAdmin();
+          }
         }
       }
 
       // HÀM HỦY YÊU CẦU
       function handleReject(id) {
-        if(confirm("Bạn có chắc chắn muốn HỦY yêu cầu này?")) {
-            if(rejectDeposit(id)) { 
-                alert("❌ Đã hủy yêu cầu."); 
-                renderAdmin(); 
-            }
+        if (confirm("Bạn có chắc chắn muốn HỦY yêu cầu này?")) {
+          if (rejectDeposit(id)) {
+            alert("❌ Đã hủy yêu cầu.");
+            renderAdmin();
+          }
         }
       }
 
@@ -312,7 +333,15 @@ function deleteRoom(id) {
         if (!id) return;
         const type = prompt("Loại phòng:", "Phòng Đơn");
         const price = prompt("Giá thuê:", "2000000");
-        if (addRoom({ id, type, price: parseInt(price), status: "Còn trống", guest: "-" })) {
+        if (
+          addRoom({
+            id,
+            type,
+            price: parseInt(price),
+            status: "Còn trống",
+            guest: "-",
+          })
+        ) {
           alert("✅ Đã thêm phòng!");
           renderAdmin();
         }
