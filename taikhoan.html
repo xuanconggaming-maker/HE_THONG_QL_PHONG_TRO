@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hồ sơ cá nhân - Xuân Công</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      .profile-container {
+        max-width: 800px;
+        margin: 30px auto;
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+      .profile-header {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+      }
+      .big-avatar {
+        width: 80px;
+        height: 80px;
+        background: #b50d0d;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 40px;
+      }
+      .info-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 0;
+        border-bottom: 1px solid #f9f9f9;
+      }
+      .info-label {
+        font-weight: bold;
+        color: #666;
+      }
+      .btn-back {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 20px;
+        background: #b50d0d;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header-wrapper">
+      <div
+        class="header"
+        style="
+          background: #b50d0d;
+          color: white;
+          padding: 15px 20px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        "
+      >
+        <h1>HỆ THỐNG QUẢN LÝ PHÒNG TRỌ</h1>
+      </div>
+    </div>
+
+    <div class="profile-container">
+      <div class="profile-header">
+        <div class="big-avatar">👤</div>
+        <div>
+          <h2 id="profName">Tên người dùng</h2>
+          <p style="color: #27ae60; font-weight: bold">Thành viên chính thức</p>
+        </div>
+      </div>
+
+      <h3>Thông tin chi tiết</h3>
+      <div class="info-row">
+        <span class="info-label">Tên đăng nhập:</span>
+        <span id="profUser">xuanconggaming</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Số dư hiện tại:</span>
+        <span id="profBalance" style="color: #b50d0d; font-weight: bold"
+          >0đ</span
+        >
+      </div>
+      <div class="info-row">
+        <span class="info-label">Trạng thái:</span>
+        <span style="color: green">Đang hoạt động</span>
+      </div>
+
+      <div style="margin-top: 30px">
+        <h3>Lịch sử hoạt động</h3>
+        <p style="font-size: 14px; color: #999; margin-top: 10px">
+          Chưa có lịch sử giao dịch gần đây.
+        </p>
+      </div>
+
+      <a href="trangchu.html" class="btn-back">Quay lại hệ thống</a>
+    </div>
+
+    <script>
+      window.onload = function () {
+        const user = localStorage.getItem("registeredUser") || "Khách";
+        const balanceKey = "balance_" + user;
+        const balance = parseInt(localStorage.getItem(balanceKey) || 0);
+
+        document.getElementById("profName").innerText = user;
+        document.getElementById("profUser").innerText = user;
+        document.getElementById("profBalance").innerText =
+          balance.toLocaleString("vi-VN") + "đ";
+      };
+    </script>
+  </body>
+</html>

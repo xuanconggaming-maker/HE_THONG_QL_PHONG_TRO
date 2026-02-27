@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng nhập Khách thuê - Xuân Công</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/login.css" />
+    <style>
+      /* Tùy chỉnh thêm để giao diện thân thiện với khách thuê */
+      .login-card {
+        border-top: 5px solid #27ae60; /* Màu xanh lá để phân biệt với Admin */
+      }
+      .login-header h2 {
+        color: #27ae60;
+      }
+      .btn-login-khach {
+        width: 100%;
+        padding: 14px;
+        background: #27ae60;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 16px;
+        transition: 0.3s;
+      }
+      .btn-login-khach:hover {
+        background: #219150;
+      }
+      .room-note {
+        font-size: 12px;
+        color: #666;
+        margin-top: 5px;
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header-wrapper">
+      <div class="header">
+        <div class="logo">
+          <h1>HỆ THỐNG QUẢN LÝ PHÒNG TRỌ</h1>
+        </div>
+      </div>
+    </div>
+
+    <div class="login-page">
+      <div class="login-card">
+        <div class="login-header">
+          <h2>KHÁCH THUÊ ĐĂNG NHẬP</h2>
+          <p>Xem hóa đơn và thông tin phòng của bạn</p>
+        </div>
+
+        <form id="loginKhachForm" class="login-form">
+          <div class="input-group">
+            <label for="roomCode">Mã phòng khách thuê</label>
+            <select
+              id="roomCode"
+              name="roomCode"
+              required
+              style="
+                width: 100%;
+                padding: 12px;
+                border: 2px solid #eee;
+                border-radius: 8px;
+              "
+            >
+              <option value="">-- Chọn mã phòng của bạn --</option>
+              <option value="P.101">Phòng P.101</option>
+              <option value="P.105">Phòng P.105</option>
+              <option value="P.201">Phòng P.201</option>
+              <option value="P.202">Phòng P.202</option>
+              <option value="P.205">Phòng P.205</option>
+            </select>
+            <p class="room-note">
+              * Chỉ các phòng đã có hợp đồng mới có thể đăng nhập
+            </p>
+          </div>
+
+          <div class="input-group">
+            <label for="phone">Số điện thoại đăng ký</label>
+            <input
+              type="text"
+              id="phone"
+              name="phone"
+              placeholder="Nhập số điện thoại khi làm hợp đồng"
+              required
+            />
+          </div>
+
+          <button type="submit" class="btn-login-khach">
+            XEM THÔNG TIN HÓA ĐƠN
+          </button>
+
+          <div style="text-align: center; margin-top: 20px">
+            <a
+              href="index.html"
+              style="text-decoration: none; color: #666; font-size: 14px"
+              >← Quay lại đăng nhập Admin</a
+            >
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>&copy; 2026. Sinh Viên Xuân Công - Khoa CNTT TRƯỜNG ĐẠI HỌC NGHỆ AN</p>
+    </div>
+
+    <script>
+      document.getElementById("loginKhachForm").onsubmit = function (e) {
+        e.preventDefault();
+
+        const room = document.getElementById("roomCode").value;
+        const phone = document.getElementById("phone").value;
+
+        // Giả lập logic kiểm tra thông tin
+        if (room && phone) {
+          // Lưu thông tin phòng đang xem vào LocalStorage để trang sau hiển thị đúng hóa đơn phòng đó
+          localStorage.setItem("currentViewRoom", room);
+          localStorage.setItem("userRole", "khach_thue");
+
+          alert(
+            "Đăng nhập thành công phòng " +
+              room +
+              "! Đang chuyển đến trang hóa đơn...",
+          );
+          window.location.href = "hoadon-khach.html";
+        } else {
+          alert("Vui lòng điền đầy đủ thông tin!");
+        }
+      };
+    </script>
+  </body>
+</html>

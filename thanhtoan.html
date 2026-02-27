@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thanh Toán Online - Xuân Công</title>
+    <style>
+      /* --- CSS GIỮ NGUYÊN GIAO DIỆN VÀ CĂN CHỈNH --- */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", sans-serif;
+      }
+      body {
+        background-color: #f4f7f6;
+        color: #333;
+      }
+
+      .header {
+        background: #b50d0d;
+        color: white;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .user-menu {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+      .user-link {
+        text-decoration: none;
+        color: white;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 500;
+      }
+      .user-avatar {
+        width: 35px;
+        height: 35px;
+        background: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #b50d0d;
+        font-weight: bold;
+      }
+
+      /* Nút thoát về trang chủ trên Header */
+      .btn-exit {
+        color: white;
+        text-decoration: none;
+        font-size: 14px;
+        border: 1px solid white;
+        padding: 5px 12px;
+        border-radius: 5px;
+        transition: 0.3s;
+      }
+      .btn-exit:hover {
+        background: white;
+        color: #b50d0d;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 30px auto;
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      }
+      .payment-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        margin-top: 20px;
+      }
+
+      .wallet-info {
+        background: #fff5f5;
+        padding: 25px;
+        border-radius: 10px;
+        border: 1px solid #ffcccc;
+      }
+      .balance-amount {
+        font-size: 32px;
+        color: #b50d0d;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+
+      .input-group input {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        font-size: 16px;
+        margin-top: 10px;
+        outline: none;
+      }
+      .btn-main {
+        width: 100%;
+        margin-top: 15px;
+        padding: 15px;
+        background: #b50d0d;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      .btn-main:hover {
+        background: #8b0a0a;
+        transform: translateY(-2px);
+      }
+
+      .qr-section {
+        text-align: center;
+        border: 2px dashed #ddd;
+        padding: 20px;
+        border-radius: 15px;
+        background: #fafafa;
+        display: none;
+      }
+      .qr-img {
+        width: 100%;
+        max-width: 220px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .status-waiting {
+        color: #f39c12;
+        font-weight: bold;
+        animation: blink 1.5s infinite;
+      }
+      @keyframes blink {
+        0% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      /* Footer căn giữa */
+      .footer {
+        width: 100%;
+        padding: 20px 0;
+        text-align: center;
+        margin-top: 50px;
+        border-top: 1px solid #eee;
+        color: #666;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="logo"><h2>HỆ THỐNG QUẢN LÝ PHÒNG TRỌ</h2></div>
+      <div class="user-menu">
+        <a href="taikhoan.html" class="user-link">
+          <span id="usernameDisplay">User</span>
+          <div class="user-avatar">👤</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="container">
+      <h2 style="text-align: center; color: #b50d0d; margin-bottom: 30px">
+        NẠP TIỀN & THANH TOÁN ONLINE
+      </h2>
+
+      <div class="payment-grid">
+        <div class="wallet-info">
+          <p style="font-size: 14px; color: #666">Số dư ví hiện tại:</p>
+          <p class="balance-amount"><span id="userBalance">0</span>đ</p>
+
+          <div class="input-group">
+            <label>Nhập số tiền nạp (VNĐ):</label>
+            <input
+              type="number"
+              id="customAmount"
+              placeholder="Ví dụ: 200000"
+            />
+          </div>
+          <button class="btn-main" onclick="step1_ShowQR()">
+            1. TẠO MÃ THANH TOÁN
+          </button>
+        </div>
+
+        <div class="qr-section" id="qrContainer">
+          <h4 style="margin-bottom: 10px">QUÉT MÃ TRÊN APP NGÂN HÀNG</h4>
+          <img id="qrImg" src="" class="qr-img" />
+          <div
+            style="
+              text-align: left;
+              background: white;
+              padding: 12px;
+              border-radius: 8px;
+              font-size: 13px;
+              border: 1px solid #eee;
+            "
+          >
+            <p>
+              <b>Số tiền:</b>
+              <span id="displayAmount" style="color: #b50d0d; font-weight: bold"
+                >0đ</span
+              >
+            </p>
+            <p>
+              <b>Nội dung:</b>
+              <span
+                id="transferMemo"
+                style="color: #b50d0d; font-weight: bold"
+              ></span>
+            </p>
+            <p
+              id="statusArea"
+              style="
+                margin-top: 10px;
+                border-top: 1px solid #eee;
+                padding-top: 5px;
+              "
+            >
+              📌 Trạng thái:
+              <span style="color: #3498db">Chờ khách quét mã...</span>
+            </p>
+          </div>
+          <button
+            id="btnConfirm"
+            class="btn-main"
+            style="background: #27ae60; display: none"
+            onclick="step2_UserConfirmed()"
+          >
+            TÔI ĐÃ CHUYỂN KHOẢN XONG
+          </button>
+        </div>
+
+        <div
+          id="qrEmpty"
+          style="
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px dashed #eee;
+            border-radius: 15px;
+            color: #999;
+            text-align: center;
+            padding: 20px;
+          "
+        >
+          Vui lòng nhập số tiền để hiển thị mã QR nạp tiền.
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 30px">
+        <a
+          href="trangchu.html"
+          style="color: #666; text-decoration: none; font-size: 14px"
+          >← Quay về Trang Chủ</a
+        >
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>
+        &copy; 2026. Sinh Viên Khoa CNTT TRƯỜNG ĐẠI HỌC NGHỆ AN - Đề tài: Thiết
+        kế hệ thống quản lý nhà trọ.
+      </p>
+    </div>
+
+    <script src="database.js"></script>
+    <script>
+      const registeredUser = localStorage.getItem("registeredUser") || "Khách";
+      const balanceKey = "balance_" + registeredUser;
+      let pendingAmount = 0;
+
+      function syncDisplay() {
+        let currentBalance = parseInt(localStorage.getItem(balanceKey) || 0);
+        document.getElementById("usernameDisplay").innerText = registeredUser;
+        document.getElementById("userBalance").innerText =
+          currentBalance.toLocaleString("vi-VN");
+      }
+
+      function step1_ShowQR() {
+        pendingAmount = parseInt(document.getElementById("customAmount").value);
+        if (isNaN(pendingAmount) || pendingAmount < 10000) {
+          alert("Vui lòng nhập tối thiểu 10.000đ!");
+          return;
+        }
+        document.getElementById("qrContainer").style.display = "block";
+        document.getElementById("qrEmpty").style.display = "none";
+        document.getElementById("transferMemo").innerText =
+          "NAP " + registeredUser.toUpperCase();
+        document.getElementById("displayAmount").innerText =
+          pendingAmount.toLocaleString("vi-VN") + "đ";
+        document.getElementById("btnConfirm").style.display = "block";
+        document.getElementById("qrImg").src =
+          `https://img.vietqr.io/image/MB-4619092006-compact.png?amount=${pendingAmount}&addInfo=NAP ${registeredUser}&accountName=VU XUAN CONG`;
+      }
+
+      function step2_UserConfirmed() {
+        // 1. Gửi yêu cầu nạp tiền vào kho lưu trữ chờ duyệt
+        if (typeof requestDeposit === "function") {
+          requestDeposit(registeredUser, pendingAmount);
+        }
+
+        // 2. Cập nhật giao diện phía khách
+        document.getElementById("btnConfirm").style.display = "none";
+        document.getElementById("statusArea").innerHTML =
+          `📌 Trạng thái: <span style="color: #e67e22; font-weight: bold;">⏳ Đã gửi yêu cầu. Vui lòng đợi Admin phê duyệt...</span>`;
+
+        alert("Yêu cầu nạp tiền của bạn đã được gửi tới hệ thống quản trị!");
+      }
+      window.onload = syncDisplay;
+    </script>
+  </body>
+</html>

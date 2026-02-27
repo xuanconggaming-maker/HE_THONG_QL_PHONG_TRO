@@ -69,32 +69,34 @@
         kế hệ thống quản lý nhà trọ.
       </p>
     </div>
-
     <script>
       document.querySelector(".login-form").onsubmit = function (e) {
-        e.preventDefault(); // Ngăn chuyển trang tự động để kiểm tra
+        e.preventDefault();
 
         let userIn = document.getElementById("username").value;
         let passIn = document.getElementById("password").value;
 
-        // LẤY THÔNG TIN ĐÃ ĐĂNG KÝ TỪ BỘ NHỚ
-        let savedUser = localStorage.getItem("registeredUser");
-        let savedPass = localStorage.getItem("registeredPass");
+        // LẤY DANH SÁCH TÀI KHOẢN TỪ BỘ NHỚ
+        let users = JSON.parse(localStorage.getItem("usersList")) || [];
 
-        // KIỂM TRA ĐIỀU KIỆN
-        if (userIn === savedUser && passIn === savedPass) {
-          // Đúng tài khoản vừa đăng ký
+        // TÌM TÀI KHOẢN KHỚP VỚI THÔNG TIN NHẬP VÀO
+        let account = users.find(
+          (u) => u.username === userIn && u.password === passIn,
+        );
+
+        if (account) {
+          // Đăng nhập thành công tài khoản đã đăng ký
           localStorage.setItem("userRole", "khach");
-          localStorage.setItem("userName", userIn);
+          localStorage.setItem("registeredUser", userIn); // Lưu tên người dùng hiện tại
           alert("Đăng nhập thành công!");
           window.location.href = "trangchu.html";
         } else if (userIn === "admin" && passIn === "123456") {
-          // Vẫn giữ 1 tài khoản admin dự phòng để bạn demo cho thầy cô
+          // Tài khoản admin dự phòng
           localStorage.setItem("userRole", "admin");
+          localStorage.setItem("registeredUser", "admin");
           alert("Chào Admin!");
-          window.location.href = "trangchu.html";
+          window.location.href = "trangchu-admin.html";
         } else {
-          // Sai thông tin
           alert("Tài khoản không tồn tại hoặc sai mật khẩu!");
           document.querySelector(".login-card").classList.add("apply-shake");
           setTimeout(() => {

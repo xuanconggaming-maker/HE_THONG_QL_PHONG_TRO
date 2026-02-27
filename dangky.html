@@ -88,18 +88,21 @@
     </div>
     <script>
       document.querySelector(".login-form").onsubmit = function (e) {
-        e.preventDefault(); // Ngăn gửi form để kiểm tra logic
+        e.preventDefault();
 
         let user = document.getElementById("reg-username").value;
         let email = document.getElementById("reg-email").value;
         let pass = document.getElementById("reg-password").value;
         let confirmPass = document.getElementById("confirm-password").value;
 
+        // LẤY DANH SÁCH TÀI KHOẢN HIỆN CÓ (nếu chưa có thì tạo mảng rỗng)
+        let users = JSON.parse(localStorage.getItem("usersList")) || [];
+
         // 1. KIỂM TRA TÀI KHOẢN ĐÃ TỒN TẠI CHƯA
-        let existingUser = localStorage.getItem("registeredUser");
-        if (existingUser === user) {
+        let isExist = users.some((u) => u.username === user);
+        if (isExist) {
           alert("Lỗi: Tài khoản này đã tồn tại trên hệ thống!");
-          return; // Dừng lại, không cho đăng ký tiếp
+          return;
         }
 
         // 2. Kiểm tra mật khẩu khớp nhau không
@@ -108,14 +111,20 @@
           return;
         }
 
-        // 3. Nếu mọi thứ ổn, tiến hành lưu
-        localStorage.setItem("registeredUser", user);
-        localStorage.setItem("registeredPass", pass);
+        // 3. THÊM TÀI KHOẢN MỚI VÀO MẢNG
+        users.push({
+          username: user,
+          password: pass,
+          email: email,
+        });
+
+        // 4. LƯU LẠI DANH SÁCH VÀO BỘ NHỚ
+        localStorage.setItem("usersList", JSON.stringify(users));
 
         alert(
           "Đăng ký thành công! Bạn có thể dùng tài khoản này để đăng nhập.",
         );
-        window.location.href = "index.html"; // Chuyển về trang đăng nhập
+        window.location.href = "index.html";
       };
     </script>
   </body>

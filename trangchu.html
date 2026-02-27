@@ -7,443 +7,206 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/home.css" />
     <style>
-      /* CSS bổ sung cho các nút lọc */
-      .filter-group {
+      .user-profile-header {
         display: flex;
-        gap: 10px;
-        margin-bottom: 15px;
-        flex-wrap: wrap;
+        align-items: center;
+        gap: 15px;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 5px 15px;
+        border-radius: 25px;
       }
-      .btn-filter {
-        padding: 8px 15px;
-        border: 1px solid #ddd;
-        border-radius: 20px;
-        cursor: pointer;
+      .user-balance-box {
+        text-align: right;
+        line-height: 1.2;
+      }
+      .user-balance-box span {
+        display: block;
+        font-size: 11px;
+        opacity: 0.9;
+        color: #eee;
+      }
+      .user-balance-box b {
+        font-size: 15px;
+        color: #fff;
+      }
+      .user-avatar-circle {
+        width: 35px;
+        height: 35px;
+        background: white;
+        color: #b50d0d;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         font-weight: bold;
-        background: #fff;
-        transition: 0.3s;
+        font-size: 18px;
       }
-      .btn-filter:hover {
-        background: #f0f0f0;
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
       }
-      .btn-filter.active {
+      /* Style cho nút Thuê ngay */
+      .btn-link {
+        text-decoration: none;
         background: #b50d0d;
         color: white;
-        border-color: #b50d0d;
+        padding: 8px 15px;
+        border-radius: 5px;
+        font-size: 13px;
+        font-weight: bold;
+        display: inline-block;
+        transition: 0.3s;
       }
-
-      .stat-summary {
-        background: #f8f9fa;
-        padding: 10px 15px;
-        border-radius: 8px;
-        margin-bottom: 20px;
-        font-size: 14px;
-        border-left: 4px solid #b50d0d;
+      .btn-link:hover {
+        background: #8b0a0a;
+        transform: scale(1.05);
       }
     </style>
   </head>
   <body>
-    <div class="header">
-  <div class="logo"><h1>HỆ THỐNG QUẢN LÝ PHÒNG TRỌ</h1></div>
-  <div class="user-profile" style="display: flex; align-items: center; gap: 15px;">
-    <div style="text-align: right;">
-      <p id="displayUserName" style="margin: 0; font-weight: bold; font-size: 14px;">Khách thuê</p>
-      <p style="margin: 0; font-size: 12px; color: #ffcccc;">Số dư: <span id="userBalance">0</span>đ</p>
-    </div>
-    <div style="width: 40px; height: 40px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #b50d0d; font-weight: bold; cursor: pointer;" onclick="alert('Xem hồ sơ cá nhân')">
-      👤
-    </div>
-    <a href="index.html" style="color: white; font-size: 12px; text-decoration: underline;">Thoát</a>
-  </div>
-</div>
+    <div class="header-wrapper">
+      <div class="header">
+        <div class="logo">
+          <h1>HỆ THỐNG QUẢN LÝ PHÒNG TRỌ</h1>
+        </div>
 
-<div class="payment-section" style="background: #fff8f8; padding: 20px; border-radius: 12px; border: 1px dashed #b50d0d; margin-bottom: 30px;">
-  <h3 style="color: #b50d0d; margin-bottom: 15px;">💳 THANH TOÁN & NẠP TIỀN ONLINE</h3>
-  <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-    <button onclick="topUp(50000)" style="padding: 10px 20px; background: #2e7d32; color: white; border: none; border-radius: 5px; cursor: pointer;">+ 50.000đ</button>
-    <button onclick="topUp(100000)" style="padding: 10px 20px; background: #2e7d32; color: white; border: none; border-radius: 5px; cursor: pointer;">+ 100.000đ</button>
-    <button onclick="topUp(500000)" style="padding: 10px 20px; background: #2e7d32; color: white; border: none; border-radius: 5px; cursor: pointer;">+ 500.000đ</button>
-    <button onclick="payOnline()" style="padding: 10px 20px; background: #b50d0d; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;"><li><a href="hopdong.html">>THANH TOÁN HÓA ĐƠN</a></li></button>
-    
+        <div class="user-profile-header">
+  <div class="user-balance-box">
+    <span>Số dư ví:</span>
+    <b id="mainBalance">0đ</b>
   </div>
-  <p style="font-size: 12px; color: #666; margin-top: 10px;">* Hệ thống hỗ trợ nạp qua MoMo, ZaloPay và VietQR.</p>
+  <a href="taikhoan.html" style="text-decoration: none; display: flex; align-items: center; gap: 15px;">
+    <div class="user-avatar-circle">👤</div>
+    <div class="user-info">
+      <strong id="mainUsername" style="color: white">User</strong>
+    </div>
+  </a>
 </div>
+    </div>
 
     <div class="container">
       <aside class="sidebar-nav">
         <h2>DANH MỤC</h2>
         <ul>
-          <li>
-            <a href="#" onclick="filterByStatus('all')">🏠 Danh sách phòng</a>
-          </li>
-          <li><a href="#">👥 Khách thuê</a></li>
+          <li><a href="trangchu.html" class="active">🏠 Danh sách phòng</a></li>
+          <li><a href="thanhtoan.html">💰 Nạp tiền Online</a></li>
           <li><a href="hopdong.html">📜 Hợp đồng</a></li>
-          <li><a href="hoadon.html">💰 Hóa đơn</a></li>
+          <li><a href="hoadon.html">📜 Thanh Toán Hóa Đơn</a></li>
+          <li><a href="index.html">Đăng Xuất</a></li>
+          <li><a href="baocao.html">Báo Cáo</a></li>
         </ul>
       </aside>
 
       <main class="main-content">
         <div
+          id="liveClock"
+          style="margin-bottom: 10px; color: #666; font-size: 14px"
+        ></div>
+        <div
+          id="statSummary"
+          class="stat-summary"
           style="
-            display: flex;
-            justify-content: space-between;
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 8px;
             margin-bottom: 20px;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
+            border-left: 4px solid #b50d0d;
           "
-        >
-          <div>
-            <input
-              type="text"
-              id="roomSearch"
-              onkeyup="searchRoom()"
-              placeholder="Nhập mã phòng để lọc..."
-              style="
-                padding: 10px;
-                border: 1px solid #ddd;
-                border-radius: 8px;
-                width: 250px;
-                outline: none;
-              "
-            />
-          </div>
-          <div
-            id="liveClock"
-            style="
-              font-weight: bold;
-              color: #b50d0d;
-              background: #fff5f5;
-              padding: 8px 15px;
-              border-radius: 20px;
-              border: 1px solid #ffcccc;
-            "
-          ></div>
-        </div>
+        ></div>
 
-        <div class="stat-summary" id="statSummary">Đang tải thống kê...</div>
-
-        <div class="filter-group">
-          <button
-            class="btn-filter active"
-            onclick="filterByStatus('all', this)"
-          >
-            Tất cả
-          </button>
-          <button
-            class="btn-filter"
-            onclick="filterByStatus('Còn trống', this)"
-            style="color: #0e170f"
-          >
-            Phòng trống
-          </button>
-          <button
-            class="btn-filter"
-            onclick="filterByStatus('Đã thuê', this)"
-            style="color: #0c0808"
-          >
-            Đã thuê
-          </button>
-        </div>
-
-        <h2>Danh sách phòng hiện tại</h2>
-        <div style="overflow-x: auto;">
         <table id="roomTable">
-          <thead>
-            <tr>
-              <th>Mã Phòng</th>
-              <th>Loại Phòng</th>
-              <th>Giá Thuê</th>
-              <th>Trạng Thái</th>
-              <th>Hành Động</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr data-status="Đã thuê">
-              <td>P.101</td>
-              <td>Phòng Đơn</td>
-              <td>2.500.000đ</td>
-              <td><span class="status status-full">Đã thuê</span></td>
-              <td>
-                <a
-                  href="#"
-                  class="btn-action"
-                  style="color: #b50d0d; font-weight: bold"
-                  >Đóng</a
-                >
-              </td>
-            </tr>
-            <tr data-status="Còn trống">
-              <td>P.102</td>
-              <td>Phòng Đôi</td>
-              <td>3.500.000đ</td>
-              <td><span class="status status-empty">Còn trống</span></td>
-              <td>
-                <a
-                  href="formdk.html"
-                  class="btn-action"
-                  style="color: #b50d0d; font-weight: bold"
-                  >Cho thuê</a
-                >
-              </td>
-            </tr>
-            <tr data-status="Còn trống">
-              <td>P.103</td>
-              <td>Phòng Đơn</td>
-              <td>500.000đ</td>
-              <td><span class="status status-empty">Còn trống</span></td>
-              <td>
-                <a
-                  href="formdk.html"
-                  class="btn-action"
-                  style="color: #b50d0d; font-weight: bold"
-                  >Cho thuê</a
-                >
-              </td>
-            </tr>
-            <tr data-status="Còn trống">
-              <td>P.104</td>
-              <td>Phòng Đơn</td>
-              <td>800.000đ</td>
-              <td><span class="status status-empty">Còn trống</span></td>
-              <td>
-                <a
-                  href="formdk.html"
-                  class="btn-action"
-                  style="color: #b50d0d; font-weight: bold"
-                  >Cho thuê</a
-                >
-              </td>
-            </tr>
-            <tr data-status="Đã thuê">
-              <td>P.105</td>
-              <td>Phòng Đôi</td>
-              <td>1.500.000đ</td>
-              <td><span class="status status-empty">Đã thuê</span></td>
-              <td>
-                <a
-                  href="#"
-                  class="btn-action"
-                  style="color: #b50d0d; font-weight: bold"
-                  >Đóng</a
-                >
-              </td>
-            </tr>
-            <tr data-status="Còn trống">
-              <td>P.106</td>
-              <td>Phòng Đơn</td>
-              <td>2.100.000đ</td>
-              <td><span class="status status-empty">Còn trống</span></td>
-              <td>
-                <a
-                  href="formdk.html"
-                  class="btn-action"
-                  style="color: #b50d0d; font-weight: bold"
-                  >Cho thuê</a
-                >
-              </td>
-            </tr>
-            <tr data-status="Đã thuê">
-              <td>P.201</td>
-              <td>Phòng Đơn</td>
-              <td>2.500.000đ</td>
-              <td><span class="status status-full">Đã thuê</span></td>
-              <td>
-                <a
-                  href="#"
-                  class="btn-action"
-                  style="color: #b50d0d; font-weight: bold"
-                  >Đóng</a
-                >
-              </td>
-            </tr>
-            <tr data-status="Đã thuê">
-              <td>P.202</td>
-              <td>Phòng Đơn</td>
-              <td>1.350.000đ</td>
-              <td><span class="status status-full">Đã thuê</span></td>
-              <td>
-                <a
-                  href="#"
-                  class="btn-action"
-                  style="color: #b50d0d; font-weight: bold"
-                  >Đóng</a
-                >
-              </td>
-            </tr>
-            <tr data-status="Còn trống">
-              <td>P.203</td>
-              <td>Phòng đôi</td>
-              <td>4.500.000đ</td>
-              <td><span class="status status-full">Còn trống</span></td>
-              <td>
-                <a
-                  href="formdk.html"
-                  class="btn-action"
-                  style="color: #b50d0d; font-weight: bold"
-                  >Cho thuê</a
-                >
-              </td>
-            </tr>
-            <tr data-status="Còn trống">
-              <td>P.204</td>
-              <td>Phòng Đơn</td>
-              <td>1.300.000đ</td>
-              <td><span class="status status-full">Còn trống</span></td>
-              <td>
-                <a
-                  href="formdk.html"
-                  class="btn-action"
-                  style="color: #b50d0d; font-weight: bold"
-                  >Cho thuê</a
-                >
-              </td>
-            </tr>
-            <tr data-status="Đã thuê">
-              <td>P.205</td>
-              <td>Phòng đôi</td>
-              <td>2.700.000đ</td>
-              <td><span class="status status-full">Đã thuê</span></td>
-              <td>
-                <a
-                  href="#"
-                  class="btn-action"
-                  style="color: #b50d0d; font-weight: bold"
-                  >Đóng</a
-                >
-              </td>
-            </tr>
-            <tr data-status="Còn trống">
-              <td>P.206</td>
-              <td>Phòng Đơn</td>
-              <td>900.000đ</td>
-              <td><span class="status status-full">Còn trống</span></td>
-              <td>
-                <a
-                  href="formdk.html"
-                  class="btn-action"
-                  style="color: #b50d0d; font-weight: bold"
-                  >Cho thuê</a
-                >
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      </main>
-    </div>
-    <h2>Hỗ trợ khách hàng</h2>
-        <p style="padding: 10px"><b>Hotline:</b> 0123.456.789</p>
-        <p style="padding: 10px">
-          <b>Địa chỉ:</b> Khu trọ Xóm 9 Trường Đại Học Nghệ An, TP. Vinh
-        </p>
-      </aside>
-      <div class="clear"></div>
+  <thead>
+    <tr>
+      <th>Mã Phòng</th>
+      <th>Loại Phòng</th>
+      <th>Giá Thuê</th>
+      <th>Trạng Thái</th>
+      <th>Hành Động</th>
+    </tr>
+  </thead>
+  <tbody id="roomList"></tbody> 
+</table>
     </div>
 
     <div class="footer">
       <p>
-        &copy;2026. Sinh Viên Khoa CNTT TRƯỜNG ĐẠI HỌC NGHỆ AN - Đề tài: Thiết
+        &copy; 2026. Sinh Viên Khoa CNTT TRƯỜNG ĐẠI HỌC NGHỆ AN - Đề tài: Thiết
         kế hệ thống quản lý nhà trọ.
       </p>
     </div>
 
     <script>
-      // 1. Chức năng tìm kiếm mã phòng
-      function searchRoom() {
-        let input = document.getElementById("roomSearch");
-        let filter = input.value.toUpperCase();
-        let table = document.getElementById("roomTable");
-        let tr = table.getElementsByTagName("tr");
+      function syncUserData() {
+    const user = localStorage.getItem("registeredUser") || "Khách";
+    // Lấy số dư riêng biệt theo tên người dùng
+    const balanceKey = "balance_" + user;
+    const balance = parseInt(localStorage.getItem(balanceKey) || 0);
+    
+    document.getElementById("mainUsername").innerText = user;
+    document.getElementById("mainBalance").innerText = balance.toLocaleString("vi-VN") + "đ";
+}
 
-        for (let i = 1; i < tr.length; i++) {
-          let td = tr[i].getElementsByTagName("td")[0];
-          if (td) {
-            let txtValue = td.textContent || td.innerText;
-            tr[i].style.display =
-              txtValue.toUpperCase().indexOf(filter) > -1 ? "" : "none";
-          }
-        }
-      }
+function updateTime() {
+    const now = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+    document.getElementById("liveClock").innerHTML = "🕒 " + now.toLocaleDateString("vi-VN", options);
+}
 
-      // 2. Chức năng lọc theo trạng thái (Đã thuê / Còn trống)
-      function filterByStatus(status, btn) {
-        let table = document.getElementById("roomTable");
-        let tr = table.getElementsByTagName("tr");
+function updateStats() {
+    let trs = document.querySelectorAll("#roomList tr");
+    let total = trs.length;
+    let rented = document.querySelectorAll("#roomList tr[data-status='Đã thuê']").length;
+    let empty = total - rented;
+    document.getElementById("statSummary").innerHTML = `📊 <b>Thống kê:</b> Tổng ${total} phòng | 🔴 Đã thuê: ${rented} | 🟢 Còn trống: ${empty}`;
+}
 
-        // Cập nhật giao diện nút
-        if (btn) {
-          document
-            .querySelectorAll(".btn-filter")
-            .forEach((b) => b.classList.remove("active"));
-          btn.classList.add("active");
-        }
-
-        for (let i = 1; i < tr.length; i++) {
-          let rowStatus = tr[i].getAttribute("data-status");
-          if (status === "all" || rowStatus === status) {
-            tr[i].style.display = "";
-          } else {
-            tr[i].style.display = "none";
-          }
-        }
-      }
-
-      // 3. Tự động tính toán thống kê
-      function updateStats() {
-        let table = document.getElementById("roomTable");
-        let tr = table.getElementsByTagName("tr");
-        let total = tr.length - 1;
-        let rented = 0;
-        let empty = 0;
-
-        for (let i = 1; i < tr.length; i++) {
-          let status = tr[i].getAttribute("data-status");
-          if (status === "Đã thuê") rented++;
-          else empty++;
-        }
-        document.getElementById("statSummary").innerHTML =
-          `📊 <b>Thống kê nhanh:</b> Tổng số ${total} phòng | 🔴 Đã thuê: ${rented} | 🟢 Còn trống: ${empty}`;
-      }
-
-      // 4. Đồng hồ thời gian thực
-      function updateTime() {
-        const now = new Date();
-        const options = {
-          weekday: "long",
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-        };
-        document.getElementById("liveClock").innerHTML =
-          "🕒 " + now.toLocaleDateString("vi-VN", options);
-      }
-
-      // Khởi chạy các hàm
-      window.onload = function () {
-        updateTime();
-        setInterval(updateTime, 1000);
-        updateStats();
-      };
-
-      // Xác nhận hành động
-      document.querySelectorAll(".btn-action").forEach((button) => {
-        button.onclick = function (e) {
-          let actionName = this.innerText;
-          let row = this.closest("tr");
-          let roomCode = row.getElementsByTagName("td")[0].innerText;
-          if (
-            !confirm(
-              "Hệ thống: Bạn muốn [" + actionName + "] phòng " + roomCode + "?",
-            )
-          ) {
-            e.preventDefault();
-          }
-        };
-      });
+window.onload = function () {
+    syncUserData();
+    updateTime();
+    setInterval(updateTime, 1000);
+    updateStats();
+};
     </script>
+    
+
+<script src="database.js"></script>
+<script>
+  function renderGuestRooms() {
+    const rooms = getRooms();
+    let html = "";
+    let rented = 0;
+
+    rooms.forEach((r) => {
+      if (r.status === "Đã thuê") rented++;
+      html += `
+        <tr data-status="${r.status}">
+          <td>${r.id}</td>
+          <td>${r.type}</td>
+          <td>${r.price.toLocaleString()}đ</td>
+          <td><span class="status ${r.status === 'Còn trống' ? 'status-empty' : ''}">${r.status}</span></td>
+          <td>${r.status === 'Còn trống' ? '<a href="formdk.html" class="btn-link">Thuê ngay</a>' : '-'}</td>
+        </tr>`;
+    });
+    document.getElementById("roomList").innerHTML = html;
+    document.getElementById("statSummary").innerHTML = `📊 <b>Thống kê:</b> Tổng ${rooms.length} phòng | 🔴 Đã thuê: ${rented} | 🟢 Còn trống: ${rooms.length - rented}`;
+  }
+
+  function syncUserData() {
+    const user = localStorage.getItem("registeredUser") || "Khách";
+    const balance = parseInt(localStorage.getItem("balance_" + user) || 0);
+    document.getElementById("mainUsername").innerText = user;
+    document.getElementById("mainBalance").innerText = balance.toLocaleString("vi-VN") + "đ";
+  }
+
+  window.onload = function() {
+    syncUserData();
+    renderGuestRooms();
+    // Thêm các hàm updateTime() của bạn ở đây
+  };
+</script>
+
+</body>
+</html>
   </body>
 </html>

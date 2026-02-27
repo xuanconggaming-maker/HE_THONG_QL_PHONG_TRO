@@ -1,7 +1,7 @@
 const DB_KEY = "ROOM_DATABASE";
-const LOG_KEY = "TRANSACTION_HISTORY"; // Key mới để lưu lịch sử nạp tiền
+const LOG_KEY = "TRANSACTION_HISTORY";
+const PENDING_KEY = "PENDING_REQUESTS";
 
-// Khởi tạo phòng nếu chưa có
 function initDatabase() {
   if (!localStorage.getItem(DB_KEY)) {
     const initialRooms = [
@@ -94,9 +94,70 @@ function initDatabase() {
   }
 }
 
-// Các hàm xử lý dữ liệu
 function getRooms() {
-  return JSON.parse(localStorage.getItem(DB_KEY));
+  return JSON.parse(localStorage.getItem(DB_KEY)) || [];
+}
+function getTransactions() {
+  return JSON.parse(localStorage.getItem(LOG_KEY)) || [];
+}
+function getPendingRequests() {
+  return JSON.parse(localStorage.getItem(PENDING_KEY)) || [];
+}
+
+function addRoom(newRoom) {
+  let rooms = getRooms();
+  if (rooms.some((r) => r.id === newRoom.id)) return false;
+  rooms.push(newRoom);
+  localStorage.setItem(DB_KEY, JSON.stringify(rooms));
+  return true;
+}
+
+function requestDeposit(username, amount) {
+  let pending = getPendingRequests();
+  pending.unshift({
+    id: "RQ" + Math.floor(Math.random() * 100000),
+    user: username,
+    amount: amount,
+    time: new Date().toLocaleString("vi-VN"),
+  });
+  localStorage.setItem(PENDING_KEY, JSON.stringify(pending));
+}
+
+function approveDeposit(reqId) {
+  let pending = getPendingRequests();
+  let index = pending.findIndex((r) => r.id === reqId);
+  if (index !== -1) {
+    let req = pending[index];
+    let balanceKey = "balance_" + req.user;
+    let currentBal = parseInt(localStorage.getItem(balanceKey) || 0);
+    localStorage.setItem(balanceKey, currentBal + req.amount);
+
+    let logs = getTransactions();
+    logs.unshift({
+      id: "GD" + Math.floor(Math.random() * 100000),
+      user: req.user,
+      amount: req.amount,
+      time: req.time,
+      status: "Thành công",
+    });
+    localStorage.setItem(LOG_KEY, JSON.stringify(logs));
+
+    pending.splice(index, 1);
+    localStorage.setItem(PENDING_KEY, JSON.stringify(pending));
+    return true;
+  }
+  return false;
+}
+
+function rejectDeposit(reqId) {
+  let pending = getPendingRequests();
+  let index = pending.findIndex((r) => r.id === reqId);
+  if (index !== -1) {
+    pending.splice(index, 1);
+    localStorage.setItem(PENDING_KEY, JSON.stringify(pending));
+    return true;
+  }
+  return false;
 }
 
 function updateRoom(roomId, newData) {
@@ -108,23 +169,6 @@ function updateRoom(roomId, newData) {
     return true;
   }
   return false;
-}
-
-// HÀM MỚI: Lưu lịch sử nạp tiền của khách
-function saveTransaction(username, amount) {
-  let logs = JSON.parse(localStorage.getItem(LOG_KEY)) || [];
-  logs.unshift({
-    id: "GD" + Math.floor(Math.random() * 100000),
-    user: username,
-    amount: amount,
-    time: new Date().toLocaleString("vi-VN"),
-    status: "Thành công",
-  });
-  localStorage.setItem(LOG_KEY, JSON.stringify(logs));
-}
-
-function getTransactions() {
-  return JSON.parse(localStorage.getItem(LOG_KEY)) || [];
 }
 
 initDatabase();
